@@ -1,7 +1,7 @@
 class Api::V1::ShopsController < ApplicationController
 
   def show
-    render json: Shop.where(category_id: params[:id]).to_json(include: [:tags, :category, :reviews])
+    render json: Shop.where(category_id: params[:id]).to_json(include: [:tags, :category, :reviews, :photos])
   end
 
   def get_shop
@@ -97,6 +97,6 @@ class Api::V1::ShopsController < ApplicationController
   private
 
     def shop_params
-      params.require(:shop).permit(:name, :group_id, :category_id, :avg_score, :done, :visit_day, :tag_string, :url, :description)
+      params.require(:shop).permit(:name, :group_id, :category_id, :avg_score, :done, :visit_day, :tag_string, :url, :description, :latitude, :longitude, :amount_of_money, :address)
     end
 end

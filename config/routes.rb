@@ -9,6 +9,7 @@ Rails.application.routes.draw do
         delete 'delete_user'
       end
       resources :users_groups
+      resources :photos
       resources :categories do
         get 'get_category'
       end

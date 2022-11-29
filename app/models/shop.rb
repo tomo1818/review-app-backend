@@ -5,4 +5,5 @@ class Shop < ApplicationRecord
   has_many :shop_tag, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_many :tags, through: :shop_tag
+  has_many :photos, dependent: :destroy
 end

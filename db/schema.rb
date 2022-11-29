@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_17_100109) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_29_083736) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_100109) do
     t.integer "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "photos", force: :cascade do |t|
+    t.string "image", null: false
+    t.bigint "shop_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shop_id"], name: "index_photos_on_shop_id"
   end
 
   create_table "reviews", force: :cascade do |t|
@@ -64,6 +72,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_100109) do
     t.string "tag_string"
     t.string "url"
     t.string "description", null: false
+    t.float "latitude", default: 35.60439042577099, null: false
+    t.float "longitude", default: 139.68384504318237, null: false
+    t.integer "amount_of_money", default: 0, null: false
+    t.string "address", default: "〒145-0061 東京都大田区 石川町1丁目31-1", null: false
     t.index ["category_id"], name: "index_shops_on_category_id"
     t.index ["group_id"], name: "index_shops_on_group_id"
   end
@@ -111,6 +123,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_17_100109) do
   end
 
   add_foreign_key "categories", "groups"
+  add_foreign_key "photos", "shops"
   add_foreign_key "reviews", "shops"
   add_foreign_key "reviews", "users"
   add_foreign_key "shop_tags", "shops"

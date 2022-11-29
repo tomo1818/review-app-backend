@@ -45,6 +45,11 @@ shop5 = Shop.create!(name: 'Shop5', group: group1, category: category3, avg_scor
 shop6 = Shop.create!(name: 'Shop6', group: group1, category: category4, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
 shop7 = Shop.create!(name: 'Shop7', group: group1, category: category1, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
 
+# Photoを作成
+photo1 = Photo.create!(image: File.open("./public/images/dummy1.jpg"), shop: shop1)
+photo2 = Photo.create!(image: File.open("./public/images/dummy2.jpg"), shop: shop1)
+photo3 = Photo.create!(image: File.open("./public/images/dummy3.jpg"), shop: shop1)
+
 # タグを作成
 tag1 = Tag.create!(name: 'tag1', group: group1)
 tag2 = Tag.create!(name: 'tag2', group: group1)

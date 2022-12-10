@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_083736) do
     t.bigint "category_id", null: false
     t.integer "avg_score", default: 0, null: false
     t.boolean "done", default: false, null: false
-    t.string "visit_day", null: false
+    t.string "visit_day", default: "2022月12日1日", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tag_string"

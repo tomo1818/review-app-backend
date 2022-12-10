@@ -7,9 +7,10 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 # ユーザー作成
-user1 = User.create!(name: 'User1', email: 'test1@email.com', password: 'password', password_confirmation: 'password')
+user4 = User.create!(name: 'User1', email: 'test4@email.com', password: 'password', password_confirmation: 'password')
 user2 = User.create!(name: 'User2', email: 'test2@email.com', password: 'password', password_confirmation: 'password')
 user3 = User.create!(name: 'User3', email: 'test3@email.com', password: 'password', password_confirmation: 'password')
+user1 = User.create!(name: 'User4', email: 'test1@email.com', password: 'password', password_confirmation: 'password')
 
 # グループ作成
 group1 = Group.create!({name:"GROUP1", owner_id: user1.id})
@@ -37,13 +38,13 @@ category3 = Category.create!(name: 'Category3', group: group1)
 category4 = Category.create!(name: 'Category4', group: group1)
 
 # Shopを作成
-shop1 = Shop.create!(name: 'Shop1', group: group1, category: category1, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1,tag2,tag3', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop2 = Shop.create!(name: 'Shop2', group: group1, category: category1, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1,tag2', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop3 = Shop.create!(name: 'Shop3', group: group2, category: category2, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag3,tag4', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop4 = Shop.create!(name: 'Shop4', group: group2, category: category2, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop5 = Shop.create!(name: 'Shop5', group: group1, category: category3, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop6 = Shop.create!(name: 'Shop6', group: group1, category: category4, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
-shop7 = Shop.create!(name: 'Shop7', group: group1, category: category1, avg_score: 5, done: false, visit_day: 'Sat, 03 Sep 2022', tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop1 = Shop.create!(name: 'Shop1', group: group1, category: category1, avg_score: 5, done: false, tag_string: 'tag1,tag2,tag3', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop2 = Shop.create!(name: 'Shop2', group: group1, category: category1, avg_score: 5, done: false, tag_string: 'tag1,tag2', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop3 = Shop.create!(name: 'Shop3', group: group2, category: category2, avg_score: 5, done: false, tag_string: 'tag3,tag4', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop4 = Shop.create!(name: 'Shop4', group: group2, category: category2, avg_score: 5, done: false, tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop5 = Shop.create!(name: 'Shop5', group: group1, category: category3, avg_score: 5, done: false, tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop6 = Shop.create!(name: 'Shop6', group: group1, category: category4, avg_score: 5, done: false, tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
+shop7 = Shop.create!(name: 'Shop7', group: group1, category: category1, avg_score: 5, done: false, tag_string: 'tag1', description: 'ディスクリプションディスクリプションディスクリプションディスクリプションディスクリプションディスクリプション', url: '')
 
 # Photoを作成
 photo1 = Photo.create!(image: File.open("./public/images/dummy1.jpg"), shop: shop1)
@@ -85,3 +86,6 @@ review4 = Review.create!(shop: shop3, user: user3, author: user3.name, comment: 
 
 # updateテスト
 # curl -X PATCH http://localhost:3000/api/v1/groups/1 -d "[user_id]=2"
+
+# curl -X POST http://192.168.0.27:3000/api/v1/categories -d "category[name]=All&category[group_id]=-1"
+# curl -X POST http://192.168.0.27:3000/api/v1/shops -d "shop[name]=test&shop[group_id]=1&shop[category_id]=-1&shop[avg_score]=0&shop[description]=test&shop[done]=false&shop[visit_day]=2022_sat&shop[tag_string]=tag1,tag2,tag5"

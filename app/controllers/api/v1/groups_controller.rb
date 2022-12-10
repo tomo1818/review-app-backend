@@ -14,8 +14,12 @@ class Api::V1::GroupsController < ApplicationController
 
   def create
     group = Group.new(group_params)
-    group.users << current_api_v1_user
-    group.owner_id = current_api_v1_user.id
+    # 追加
+    user = User.find(group_params[:owner_id])
+    group.users << user
+    # 追加終わり
+    # group.users << current_api_v1_user
+    # group.owner_id = current_api_v1_user.id
     if group.save
       render json: group.as_json(include: :users)
     else

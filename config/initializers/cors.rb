@@ -10,7 +10,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     # 変更前
     # origins "http://localhost:3001"
     # 変更後
-    origins "https://review-app-front.vercel.app"
+    # origins "https://review-app-front.vercel.app"
+    origins "*"
 
     resource "*",
       headers: :any,

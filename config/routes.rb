@@ -10,6 +10,7 @@ Rails.application.routes.draw do
       end
       resources :users_groups
       resources :photos
+      resources :tags
       resources :categories do
         get 'get_category'
       end

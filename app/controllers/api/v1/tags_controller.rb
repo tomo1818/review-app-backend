@@ -1,6 +1,10 @@
 class Api::V1::TagsController < ApplicationController
   def index
-    render json: Tag.all
+    if params[:group_id]
+      render json: Tag.where(group_id: params[:group_id])
+    else
+      render json: Tag.all
+    end
   end
 
   def show
@@ -18,6 +22,6 @@ class Api::V1::TagsController < ApplicationController
 
   private
     def group_params
-      params.require(:tag).permit(:name)
+      params.require(:tag).permit(:name, :group_id)
     end
 end

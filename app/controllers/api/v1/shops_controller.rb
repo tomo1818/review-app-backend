@@ -6,11 +6,11 @@ class Api::V1::ShopsController < ApplicationController
 
   def get_shop
     avg_score = Review.where(shop_id: params[:shop_id]).average(:score)
-    render json: { shop: Shop.find(params[:shop_id]).as_json(include: [:tags, :reviews, :category]) , avg_score: avg_score}, status: 200
+    render json: { shop: Shop.find(params[:shop_id]).as_json(include: [:tags, :reviews, :category, :photos]) , avg_score: avg_score}, status: 200
   end
 
   def get_all_shops
-    render json: Shop.where(group_id: params[:shop_id]).to_json(include: [:tags, :category, :reviews])
+    render json: Shop.where(group_id: params[:shop_id]).to_json(include: [:tags, :category, :reviews, :photos])
   end
 
   def get_tags
@@ -18,7 +18,17 @@ class Api::V1::ShopsController < ApplicationController
   end
 
   def create
-    shop = Shop.create(shop_params)
+    new_params = shop_params
+    if shop_params[:category_id] == "-1" || shop_params[:category_id] == -1
+      categories = Category.where(group_id: shop_params[:group_id])
+      if categories.length == 0
+        category = Category.create({name: "All", group_id: shop_params[:group_id]})
+        new_params[:category_id] = category.id
+      else
+        new_params[:category_id] = categories[0][:id]
+      end
+    end
+    shop = Shop.create(new_params)
     tags = params[:tag_string].to_s.split(',')
     if shop.save
       # タグを追加
@@ -36,7 +46,7 @@ class Api::V1::ShopsController < ApplicationController
           end
         end
       end
-      render json: shop.to_json(include: [:tags, :category, :reviews])
+      render json: shop.to_json(include: [:tags, :category, :reviews, :photos])
     else
       render json: shop.erros, status: 422
     end

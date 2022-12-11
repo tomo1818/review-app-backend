@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_29_083736) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_11_093605) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -28,6 +28,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_29_083736) do
     t.integer "owner_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "uid", default: "b4c4eaf1-e465-4e96-8444-5be79a09ba00", null: false
   end
 
   create_table "photos", force: :cascade do |t|

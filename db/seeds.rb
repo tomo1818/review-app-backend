@@ -16,6 +16,7 @@ user1 = User.create!(name: 'User4', email: 'test1@email.com', password: 'passwor
 group1 = Group.create!({name:"GROUP1", owner_id: user1.id})
 group2 = Group.create!({name:"GROUP2", owner_id: user1.id})
 group3 = Group.create!({name:"GROUP3", owner_id: user2.id})
+group4 = Group.create!({name:"GROUP4", owner_id: user3.id, uid: "uuid-test"})
 
 # ユーザーとグループの関連付けを追加
 user1.groups << group1

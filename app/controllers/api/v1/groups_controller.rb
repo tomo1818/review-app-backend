@@ -1,6 +1,17 @@
 class Api::V1::GroupsController < ApplicationController
   def index
-    render json: Group.all
+    if params[:uid] && params[:user_id]
+      groups = []
+      search_groups = Group.where(uid: params[:uid])
+      search_groups.each do |group|
+        if UserGroup.find_by(user_id: params[:user_id], group_id: group.id) == nil
+          groups.push(group)
+        end
+      end
+      render json: groups.as_json(include: :users)
+    else
+      render json: Group.all
+    end
   end
 
   def show
@@ -53,7 +64,7 @@ class Api::V1::GroupsController < ApplicationController
 
   private
     def group_params
-      params.require(:group).permit(:name, :owner_id)
+      params.require(:group).permit(:name, :owner_id, :uid)
     end
 
   # def ensure_correct_user

@@ -92,7 +92,7 @@ class Api::V1::ShopsController < ApplicationController
       end
     end
     if shop.update(shop_params)
-      render json: shop.to_json(include: [:tags, :category, :reviews])
+      render json: shop.to_json(include: [:tags, :category, :reviews, :photos])
     else
       render json: shop.errors, status: 422
     end
